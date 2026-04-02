@@ -1376,10 +1376,7 @@
 
     <div class="hero-content">
       <div class="hero-tag">Ingeniería de Fórmula 1</div>
-      <h1 class="hero-title">
-        Ingeniería<br>
-        <em>al límite</em>
-      </h1>
+      <h1 class="hero-title">Ingeniería<br><em>al límite</em></h1>
       <p class="hero-sub">
         Más de una década diseñando, analizando y optimizando sistemas mecánicos
         en el entorno más exigente del automovilismo mundial.
@@ -1784,9 +1781,17 @@
       const el = document.querySelector('.hero-title');
       if (!el) return;
       const html = el.innerHTML;
-      el.innerHTML = html.replace(/(<br\s*\/?>|<em>|<\/em>)/g, '§$1§').split('§').map(chunk => {
+      el.innerHTML = html.trim().replace(/(<br\s*\/?>|<em>|<\/em>)/g, '§$1§').split('§').map((chunk, index, array) => {
         if (chunk.match(/^</)) return chunk;
-        return chunk.split('').map(ch =>
+        let text = chunk;
+        // Trim leading space for first chunk and trailing for last,
+        // and also handle the whitespace chunks between tags if they are just indentation.
+        if (index === 0) text = text.replace(/^\s+/, '');
+        if (index === array.length - 1) text = text.replace(/\s+$/, '');
+        // If it's a chunk entirely composed of whitespace after a <br>, it's likely indentation.
+        if (array[index-1] && array[index-1].match(/<br/i)) text = text.replace(/^\s+/, '');
+
+        return text.split('').map(ch =>
           ch === ' '
             ? '<span style="display:inline-block;width:0.28em"></span>'
             : `<span class="char-wrap"><span class="char" style="display:inline-block;transform:translateY(110%)">${ch}</span></span>`
