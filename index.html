@@ -1240,7 +1240,8 @@
       /* HERO */
       .hero { padding: 0 20px 40px; }
       .hero-content { max-width: 100%; }
-      .hero-title { font-size: clamp(40px, 12vw, 72px); }
+      .hero-title { font-size: clamp(34px, 10vw, 64px); line-height: 1.1; letter-spacing: -0.01em; white-space: nowrap; }
+      .hero-title em { white-space: nowrap; }
       .hero-sub { font-size: 14px; max-width: 100%; }
       .hero-number { display: none; }
       .hero-metrics {
@@ -2029,7 +2030,12 @@
             const progress = self.progress;
 
             // Sincronizar currentTime del video
-            scrubVideo.currentTime = progress * duration;
+            if (scrubVideo.readyState >= 2) {
+              const targetTime = progress * duration;
+              // Forzar pausa y actualizar
+              scrubVideo.pause();
+              scrubVideo.currentTime = targetTime;
+            }
 
             // Actualizar barra de progreso
             if (progressBar) {
@@ -2059,6 +2065,13 @@
             }
           }
         });
+
+        // Asegurar que el video se cargue y se muestre el primer frame en mobile
+        scrubVideo.play().then(() => {
+          scrubVideo.pause();
+        }).catch(() => { });
+
+        ScrollTrigger.refresh();
       }
 
       // El video necesita estar cargado para conocer su duration
