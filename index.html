@@ -1182,6 +1182,96 @@
       will-change: transform;
     }
 
+    /* ─── LIVE RACE TV SECTION ────────────────────────── */
+    .live-race {
+      padding: 120px 48px;
+      background: var(--darker);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    .tv-frame {
+      width: 100%;
+      max-width: 1100px;
+      aspect-ratio: 16/9;
+      background: #000;
+      position: relative;
+      border: 1px solid rgba(232, 0, 29, 0.2);
+      box-shadow: 0 0 50px rgba(232, 0, 29, 0.05);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .tv-frame::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border: 1px solid var(--red);
+      opacity: 0.3;
+      clip-path: polygon(0 0, 40px 0, 40px 2px, 0 2px, 0 40px, 2px 40px, 2px 0);
+      pointer-events: none;
+    }
+
+    .tv-frame::after {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border: 1px solid var(--red);
+      opacity: 0.3;
+      clip-path: polygon(100% 100%, calc(100% - 40px) 100%, calc(100% - 40px) calc(100% - 2px), 100% calc(100% - 2px), 100% calc(100% - 40px), calc(100% - 2px) calc(100% - 40px), calc(100% - 2px) 100%);
+      pointer-events: none;
+    }
+
+    .tv-screen {
+      width: 100%;
+      height: 100%;
+      border: none;
+      filter: contrast(1.1) brightness(0.9);
+    }
+
+    .screen-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+      background-size: 100% 2px, 3px 100%;
+      pointer-events: none;
+      z-index: 2;
+      opacity: 0.4;
+    }
+
+    .tv-hud {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--red);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .tv-rec {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .rec-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--red);
+      border-radius: 50%;
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
     /* ═══════════════════════════════════════════════════
        RESPONSIVE — TABLET (max-width: 1024px)
        ═══════════════════════════════════════════════════ */
@@ -1486,6 +1576,33 @@
     </div>
   </section>
 
+  <!-- LIVE TV SECTION -->
+  <section class="live-race" id="live">
+    <div class="section-header" style="width: 100%; max-width: 1100px; margin-bottom: 40px;">
+      <div>
+        <div class="section-tag">04 · Transmisión</div>
+        <h2 class="section-title">Última<br>Carrera</h2>
+      </div>
+      <p class="section-desc">
+        Visualiza los momentos clave del último Gran Premio finalizado. Datos técnicos y acción pura.
+      </p>
+    </div>
+
+    <div class="tv-frame">
+      <div class="screen-overlay"></div>
+      <iframe class="tv-screen" 
+              src="https://www.youtube.com/embed?listType=playlist&list=PLfoNZDOnbK8X1HhI6N-f027pLrkY6-C2F&autoplay=0&mute=1" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowfullscreen>
+      </iframe>
+      <div class="tv-hud">
+        <div class="tv-rec"><div class="rec-dot"></div> LIVE FEED</div>
+        <div>SRC: F1_OFFICIAL_BROADCAST</div>
+        <div>CHAN: 001_RACE_HIGHLIGHTS</div>
+      </div>
+    </div>
+  </section>
+
   <!-- STATS -->
   <div class="stats">
     <div class="stat-item">
@@ -1520,7 +1637,7 @@
       <div class="about-accent"></div>
     </div>
     <div class="about-content">
-      <div class="about-pre">03 · Perfil</div>
+      <div class="about-pre">05 · Perfil</div>
       <h2 class="about-name">Tu nombre<br>aquí</h2>
       <p class="about-bio">
         Ingeniero mecánico especializado en sistemas de alta performance para
@@ -1564,7 +1681,7 @@
   <!-- CONTACT -->
   <section class="contact" id="contact">
     <div class="contact-left">
-      <div class="section-tag">04 · Contacto</div>
+      <div class="section-tag">06 · Contacto</div>
       <h2 class="section-title">Hablemos<br>de tu<br>proyecto</h2>
       <p class="contact-intro">Disponible para proyectos de consultoría, desarrollo técnico y colaboraciones con equipos
         de motorsport a nivel internacional.</p>
