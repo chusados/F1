@@ -1057,6 +1057,7 @@
       outline: none;
       transition: border-color 0.2s;
       -webkit-appearance: none;
+      appearance: none;
       border-radius: 0;
       border-top: none;
       border-left: none;
@@ -1455,12 +1456,13 @@
       <span></span><span></span><span></span>
     </button>
     <ul class="nav-links" id="nav-links">
-      <li class="magnetic-wrap"><a href="#services" class="magnetic nav-link-item">Servicios</a></li>
+      <li class="magnetic-wrap"><a href="#telemetry" class="magnetic nav-link-item">Telemetría</a></li>
+      <li class="magnetic-wrap"><a href="#portfolio" class="magnetic nav-link-item">Proyectos</a></li>
       <li class="magnetic-wrap"><a href="#about" class="magnetic nav-link-item">Perfil</a></li>
       <li class="magnetic-wrap"><a href="#contact" class="magnetic nav-link-item">Contacto</a></li>
     </ul>
     <div class="magnetic-wrap nav-cta-wrap">
-      <a class="nav-cta magnetic" href="#contact">Trabajemos</a>
+      <a class="nav-cta magnetic" href="#contact">Hablemos</a>
     </div>
   </nav>
 
@@ -1483,11 +1485,11 @@
     <div class="hero-number parallax-el" data-speed="0.3">01</div>
 
     <div class="hero-content">
-      <div class="hero-tag">Ingeniería de Fórmula 1</div>
-      <h1 class="hero-title">Ingeniería<br><em>al límite</em></h1>
+      <div class="hero-tag">Ingeniería de Sistemas · David Gómez</div>
+      <h1 class="hero-title">Ingeniería<br><em>en la cumbre</em></h1>
       <p class="hero-sub">
-        Más de una década diseñando, analizando y optimizando sistemas mecánicos
-        en el entorno más exigente del automovilismo mundial.
+        Especialista en sistemas de propulsión y telemetría avanzada. 
+        Optimizando cada milisegundo para los equipos líderes del paddock global.
       </p>
       <div class="hero-actions">
         <div class="magnetic-wrap"><a class="btn-main magnetic" href="#contact">Contratar</a></div>
@@ -1552,6 +1554,151 @@
     </div>
   </section>
 
+  <!-- MISSION CONTROL (TELEMETRÍA) -->
+  <section class="mission-control" id="telemetry">
+    <div class="telemetry-grid">
+      <div class="telemetry-header">
+        <div class="live-indicator">
+          <div class="pulse-dot"></div>
+          MISSION CONTROL —— LIVE TELEMETRY
+        </div>
+        <div class="telemetry-meta">
+          <span>CIRCUIT: SPA-FRANCORCHAMPS</span>
+          <span>STATUS: REAL-TIME LINK ACTIVE</span>
+        </div>
+      </div>
+      
+      <div class="charts-container">
+        <!-- Dashboard de Teletría -->
+        <div class="chart-box">
+          <div class="chart-label">ENGINE SPEED (RPM)</div>
+          <div class="chart-val" id="val-rpm">0</div>
+          <canvas id="canvas-rpm"></canvas>
+        </div>
+        <div class="chart-box">
+          <div class="chart-label">VEHICLE SPEED (KM/H)</div>
+          <div class="chart-val" id="val-speed">0</div>
+          <canvas id="canvas-speed"></canvas>
+        </div>
+        <div class="chart-box">
+          <div class="chart-label">THROTTLE / BRAKE (%)</div>
+          <canvas id="canvas-pedals"></canvas>
+        </div>
+        <div class="chart-box">
+          <div class="chart-label">G-FORCE (LATERAL/LONG)</div>
+          <canvas id="canvas-gforce"></canvas>
+        </div>
+      </div>
+
+      <div class="telemetry-footer">
+        <div class="footer-stat"><span>FL STATUS:</span> <span class="green">OPTIMAL</span></div>
+        <div class="footer-stat"><span>ERS DEPLOY:</span> <span class="blue">84%</span></div>
+        <div class="footer-stat"><span>FUEL FLOW:</span> <span class="red">100kg/h</span></div>
+      </div>
+    </div>
+
+    <!-- Estilos específicos para Telemetría -->
+    <style>
+      .mission-control {
+        background: #050505;
+        padding: 100px 48px;
+        position: relative;
+        border-top: 1px solid rgba(255,255,255,0.05);
+      }
+      .telemetry-grid {
+        max-width: 1300px;
+        margin: 0 auto;
+        border: 1px solid rgba(232, 0, 29, 0.2);
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        background: rgba(10,10,10,0.4);
+        backdrop-filter: blur(10px);
+      }
+      .telemetry-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-family: var(--mono);
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        padding-bottom: 20px;
+      }
+      .live-indicator {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: var(--red);
+        font-size: 13px;
+        letter-spacing: 0.1em;
+      }
+      .pulse-dot {
+        width: 8px; height: 8px;
+        background: var(--red);
+        border-radius: 50%;
+        box-shadow: 0 0 10px var(--red);
+        animation: telemetryPulse 1.5s infinite;
+      }
+      @keyframes telemetryPulse {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.4; transform: scale(0.8); }
+      }
+      .telemetry-meta {
+        display: flex;
+        gap: 30px;
+        color: var(--gray);
+        font-size: 10px;
+        letter-spacing: 0.1em;
+      }
+      .charts-container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+      }
+      .chart-box {
+        background: rgba(255,255,255,0.02);
+        border: 1px solid rgba(255,255,255,0.05);
+        padding: 20px;
+        position: relative;
+      }
+      .chart-label {
+        font-family: var(--mono);
+        font-size: 9px;
+        color: var(--gray);
+        margin-bottom: 10px;
+        letter-spacing: 0.12em;
+      }
+      .chart-val {
+        font-family: var(--cond);
+        font-size: 28px;
+        font-weight: 700;
+        margin-bottom: 15px;
+        color: var(--white);
+      }
+      .chart-box canvas { width: 100%; height: 100px; }
+      .telemetry-footer {
+        display: flex;
+        gap: 40px;
+        font-family: var(--mono);
+        font-size: 10px;
+        color: var(--gray);
+        border-top: 1px solid rgba(255,255,255,0.1);
+        padding-top: 20px;
+      }
+      .green { color: #00ff88; }
+      .blue { color: #00d4ff; }
+      
+      @media (max-width: 1024px) {
+        .charts-container { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (max-width: 768px) {
+        .charts-container { grid-template-columns: 1fr; }
+        .telemetry-grid { padding: 20px; }
+        .telemetry-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+      }
+    </style>
+  </section>
+
   <!-- SERVICES -->
   <section class="services" id="services">
     <div class="section-header">
@@ -1591,6 +1738,108 @@
             Toolset</span></div>
       </div>
     </div>
+  </section>
+
+  <!-- PROJECT GALLERY -->
+  <section class="gallery" id="portfolio">
+    <div class="gallery-header">
+      <div class="section-tag">03 · Proyectos destacados</div>
+      <h2 class="section-title">Ingeniería<br>de detalle</h2>
+    </div>
+
+    <div class="project-grid">
+      <div class="project-card large">
+        <div class="project-img">
+          <img src="assets/project-engine.png" alt="Motor V6 Híbrido">
+          <div class="project-overlay">
+            <div class="project-info">
+              <span class="project-cat">Powertrain / ERS</span>
+              <h3 class="project-name">V6 Hybrid Efficiency</h3>
+              <p class="project-desc">Optimización térmica del MGU-H para reducir el lag del turbo en un 12% bajo regulaciones 2024.</p>
+              <div class="project-specs">
+                <span>ICE: 1.6L V6</span>
+                <span>EFF: 52%+</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-img">
+          <img src="assets/project-wing.png" alt="Alerón Delantero CFD">
+          <div class="project-overlay">
+            <div class="project-info">
+              <span class="project-cat">Aerodynamics / CFD</span>
+              <h3 class="project-name">Front Wing Vortex</h3>
+              <p class="project-desc">Gestión del Y250 vortex para mejorar la alimentación del suelo y carga aerodinámica.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-img">
+          <img src="assets/project-suspension.png" alt="Suspensión F1">
+          <div class="project-overlay">
+            <div class="project-info">
+              <span class="project-cat">Chassis / Suspension</span>
+              <h3 class="project-name">Active Geometry</h3>
+              <p class="project-desc">Diseño de suspensión push-rod con cinemática variable para optimización de degradación.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      .gallery { padding: 120px 48px; background: #080808; }
+      .gallery-header { margin-bottom: 60px; }
+      .project-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+      .project-card {
+        position: relative;
+        aspect-ratio: 16/10;
+        background: #111;
+        overflow: hidden;
+        border: 1px solid rgba(255,255,255,0.05);
+      }
+      .project-card.large { grid-column: span 3; aspect-ratio: 21/9; }
+      .project-img { width: 100%; height: 100%; position: relative; }
+      .project-img img { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; transition: transform 0.8s ease, opacity 0.5s; }
+      .project-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, rgba(5,5,5,0.9) 0%, transparent 100%);
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        opacity: 0;
+        transition: opacity 0.4s;
+      }
+      .project-card:hover .project-overlay { opacity: 1; }
+      .project-card:hover .project-img img { transform: scale(1.05); opacity: 0.3; }
+      
+      .project-cat { font-family: var(--mono); font-size: 10px; color: var(--red); text-transform: uppercase; letter-spacing: 0.15em; display: block; margin-bottom: 12px; }
+      .project-name { font-family: var(--cond); font-size: 32px; font-weight: 800; text-transform: uppercase; margin-bottom: 10px; }
+      .project-desc { font-size: 14px; font-weight: 300; color: var(--gray); line-height: 1.6; max-width: 500px; }
+      .project-specs { display: flex; gap: 20px; margin-top: 20px; font-family: var(--mono); font-size: 11px; color: var(--white); }
+      
+      @media (max-width: 1024px) {
+        .project-grid { grid-template-columns: repeat(2, 1fr); }
+        .project-card.large { grid-column: span 2; }
+      }
+      @media (max-width: 768px) {
+        .gallery { padding: 60px 20px; }
+        .project-grid { grid-template-columns: 1fr; }
+        .project-card.large { grid-column: span 1; aspect-ratio: 1/1; }
+        .project-name { font-size: 24px; }
+      }
+    </style>
   </section>
 
   <!-- LIVE TV SECTION -->
@@ -1657,12 +1906,13 @@
     </div>
     <div class="about-content">
       <div class="about-pre">05 · Perfil</div>
-      <h2 class="about-name">Tu nombre<br>aquí</h2>
+      <h2 class="about-name">David Gómez</h2>
       <p class="about-bio">
-        Ingeniero mecánico especializado en sistemas de alta performance para
-        competición. Más de una década en boxes y fábricas de Fórmula 1,
-        colaborando con equipos del paddock en el diseño y puesta a punto de
-        unidades de potencia de última generación.
+        Ingeniero mecánico de élite con especialización en sistemas de propulsión de alta performance. 
+        Con una profunda trayectoria en el paddock de la Fórmula 1, he liderado proyectos de optimización 
+        de unidades de potencia híbridas y desarrollo aerodinámico avanzado, fusionando el análisis de 
+        datos de telemetría de precisión con un diseño industrial de vanguardia. Mi enfoque se centra en 
+        desafiar los límites físicos para alcanzar la máxima eficiencia competitiva.
       </p>
       <div class="about-specialties" id="specialties">
         <div class="spec-row">
@@ -1697,6 +1947,52 @@
     </div>
   </section>
 
+  <!-- METHODOLOGY SECTION -->
+  <section class="methodology" id="method">
+    <div class="div-header" style="padding: 0 48px;">
+      <div class="section-tag">06 · El Proceso</div>
+      <h2 class="section-title">Metodología<br>de Carreras</h2>
+    </div>
+
+    <div class="method-steps">
+      <div class="method-step">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <h3>Simulación de Telemetría</h3>
+          <p>Análisis masivo de datos históricos para identificar cuellos de botella mediante CFD y simulaciones de banco.</p>
+        </div>
+      </div>
+      <div class="method-step">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <h3>Diseño CAD/FEA</h3>
+          <p>Modelado de componentes críticos y validación estructural bajo cargas de fatiga extrema y Gforce.</p>
+        </div>
+      </div>
+      <div class="method-step">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <h3>Iteración Dinámica</h3>
+          <p>Optimización en tiempo real basada en el feedback de pista y correlación con el simulador del equipo.</p>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      .methodology { padding: 100px 0; background: #050505; border-top: 1px solid rgba(255,255,255,0.05); }
+      .method-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 60px; padding: 0 48px; }
+      .method-step { position: relative; border-left: 1px solid rgba(232,0,29,0.3); padding-left: 30px; }
+      .step-num { font-family: var(--mono); font-size: 11px; color: var(--red); margin-bottom: 20px; }
+      .method-step h3 { font-family: var(--cond); font-size: 24px; text-transform: uppercase; margin-bottom: 15px; }
+      .method-step p { font-size: 14px; color: var(--gray); line-height: 1.7; }
+      
+      @media (max-width: 768px) {
+        .method-steps { grid-template-columns: 1fr; gap: 30px; padding: 0 20px; }
+        .methodology .div-header { padding: 0 20px; }
+      }
+    </style>
+  </section>
+
   <!-- CONTACT -->
   <section class="contact" id="contact">
     <div class="contact-left">
@@ -1707,11 +2003,11 @@
       <div class="contact-details">
         <div class="contact-item">
           <span class="contact-item-label">Email</span>
-          <a class="contact-item-val" href="#">contacto@empresa.com</a>
+          <a class="contact-item-val" href="mailto:david.gomez@f1engineering.pro">david.gomez@f1engineering.pro</a>
         </div>
         <div class="contact-item">
           <span class="contact-item-label">LinkedIn</span>
-          <a class="contact-item-val" href="#">linkedin.com/in/tuusuario</a>
+          <a class="contact-item-val" href="https://linkedin.com/in/david-gomez-f1">linkedin.com/in/david-gomez-f1</a>
         </div>
         <div class="contact-item">
           <span class="contact-item-label">Ubicación</span>
@@ -2255,6 +2551,103 @@
         if (canvas) canvas.style.display = 'none';
       }
     })();
+
+    /* ═══════════════════════════════════════════════════
+       TELEMETRY SIMULATION
+       ═══════════════════════════════════════════════════ */
+    (function() {
+      const canvases = {
+        rpm: document.getElementById('canvas-rpm'),
+        speed: document.getElementById('canvas-speed'),
+        pedals: document.getElementById('canvas-pedals'),
+        gforce: document.getElementById('canvas-gforce')
+      };
+      
+      const ctxs = {};
+      for (let k in canvases) {
+        if (canvases[k]) {
+          ctxs[k] = canvases[k].getContext('2d');
+          canvases[k].width = canvases[k].offsetWidth;
+          canvases[k].height = 100;
+        }
+      }
+
+      const history = { rpm: [], speed: [] };
+      const maxPts = 50;
+
+      function drawLineChart(ctx, data, color, maxVal) {
+        const w = ctx.canvas.width;
+        const h = ctx.canvas.height;
+        ctx.clearRect(0,0,w,h);
+        ctx.beginPath();
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 2;
+        data.forEach((v, i) => {
+          const x = (i / maxPts) * w;
+          const y = h - (v / maxVal) * h;
+          if (i === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        });
+        ctx.stroke();
+        
+        ctx.lineTo(w, h); ctx.lineTo(0, h);
+        ctx.fillStyle = color.replace('1)', '0.1)');
+        ctx.fill();
+      }
+
+      function updateTelemetry() {
+        const rpm = 11000 + Math.random() * 4000;
+        const speed = 280 + Math.random() * 40;
+        
+        document.getElementById('val-rpm').innerText = Math.floor(rpm);
+        document.getElementById('val-speed').innerText = Math.floor(speed);
+        
+        history.rpm.push(rpm); if (history.rpm.length > maxPts) history.rpm.shift();
+        history.speed.push(speed); if (history.speed.length > maxPts) history.speed.shift();
+        
+        if (ctxs.rpm) drawLineChart(ctxs.rpm, history.rpm, 'rgba(232, 0, 29, 1)', 18000);
+        if (ctxs.speed) drawLineChart(ctxs.speed, history.speed, 'rgba(255, 255, 255, 1)', 360) ;
+        
+        // Pedals
+        if (ctxs.pedals) {
+          const ctx = ctxs.pedals; const w = ctx.canvas.width; const h = ctx.canvas.height;
+          ctx.clearRect(0,0,w,h);
+          const t = Math.random() * 100; const b = Math.random() < 0.2 ? Math.random() * 80 : 0;
+          ctx.fillStyle = 'rgba(0, 255, 136, 0.4)'; ctx.fillRect(0, 10, (t/100)*w, 30);
+          ctx.fillStyle = 'rgba(232, 0, 29, 0.4)'; ctx.fillRect(0, 50, (b/100)*w, 30);
+        }
+        
+        // G-Force
+        if (ctxs.gforce) {
+          const ctx = ctxs.gforce; const w = ctx.canvas.width; const h = ctx.canvas.height;
+          ctx.clearRect(0,0,w,h);
+          ctx.strokeStyle = 'rgba(255,255,255,0.1)'; ctx.strokeRect(w/2 - 40, h/2 - 40, 80, 80);
+          ctx.beginPath(); ctx.arc(w/2 + (Math.random()-0.5)*40, h/2 + (Math.random()-0.5)*40, 4, 0, Math.PI*2);
+          ctx.fillStyle = 'var(--red)'; ctx.fill();
+        }
+        
+        requestAnimationFrame(updateTelemetry);
+      }
+      
+      ScrollTrigger.create({
+        trigger: "#telemetry",
+        start: "top bottom",
+        onEnter: () => updateTelemetry()
+      });
+    })();
+
+    /* ═══════════════════════════════════════════════════
+       NEW SECTIONS ENTRANCE
+       ═══════════════════════════════════════════════════ */
+    gsap.from('.project-card', {
+      scrollTrigger: { trigger: '.project-grid', start: 'top 85%' },
+      opacity: 0, y: 50, duration: 0.8, stagger: 0.2, ease: 'power3.out'
+    });
+
+    gsap.from('.method-step', {
+      scrollTrigger: { trigger: '.methodology', start: 'top 85%' },
+      opacity: 0, x: -30, duration: 0.8, stagger: 0.2, ease: 'power3.out'
+    });
 
   </script>
 </body>
